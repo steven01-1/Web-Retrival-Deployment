@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>QuillKit documentation</title>
+</head>
+<body>
+  <main>
+    <h1>QuillKit documentation</h1>
+    <p>QuillKit is a lightweight toolkit for building structured documents.</p>
+
+    <h2>Overview</h2>
+    <p>QuillKit provides a small, composable API for turning plain text sources into structured documents. It ships with a template engine, a layout pipeline, and exporters for HTML and PDF.</p>
+<p>The project follows a documentation-first design: every public function is covered by examples, and the command line interface mirrors the Python API one to one.</p>
+
+    <h2>Feature overview</h2>
+    <ul>
+  <li>Template engine with inheritance, slots, and named blocks.</li>
+  <li>Incremental builds that re-render only changed sources.</li>
+  <li>Built-in exporters for standalone HTML and print-ready PDF.</li>
+  <li>Pluggable renderers for custom output formats.</li>
+  <li>A command line interface for builds, previews, and validation.</li>
+</ul>
+
+    <h2>Installation</h2>
+    <p>QuillKit is published on PyPI and can be installed with pip:</p>
+<pre><code>python -m pip install quillkit</code></pre>
+<p>The core package has no compiled dependencies. Optional extras provide syntax highlighting and PDF export:</p>
+<pre><code>python -m pip install "quillkit[highlight,pdf]"</code></pre>
+<p>After installation, verify that the command line entry point is available:</p>
+<pre><code>quillkit --version</code></pre>
+
+    <h2>Quick start</h2>
+    <p>Create a source file named <code>intro.qk</code> and render it with the default template:</p>
+<pre><code>from quillkit import Document, render
+
+doc = Document.from_file("intro.qk")
+html = render(doc, template="default")
+doc.write("intro.html", html)</code></pre>
+<p>The same operation is available from the command line:</p>
+<pre><code>quillkit build intro.qk --template default --output intro.html</code></pre>
+
+    <h2>Configuration reference</h2>
+    <p>QuillKit reads an optional <code>quillkit.toml</code> file from the project root. The most common settings are listed below.</p>
+<table>
+  <thead>
+    <tr><th>Setting</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>template</code></td><td><code>default</code></td><td>Template used when none is specified on the command line.</td></tr>
+    <tr><td><code>output_dir</code></td><td><code>site</code></td><td>Directory that receives rendered documents.</td></tr>
+    <tr><td><code>incremental</code></td><td><code>true</code></td><td>Re-render only sources whose inputs changed.</td></tr>
+    <tr><td><code>strict</code></td><td><code>false</code></td><td>Treat template warnings as build errors.</td></tr>
+  </tbody>
+</table>
+
+    <h2>Command line interface</h2>
+    <ul>
+  <li><code>quillkit build</code> renders one or more source files.</li>
+  <li><code>quillkit preview</code> starts a local preview server with live reload.</li>
+  <li><code>quillkit check</code> validates templates and links without writing output.</li>
+  <li><code>quillkit init</code> creates a starter project layout.</li>
+</ul>
+
+    <h2>Changelog</h2>
+    <h3>1.2.0</h3>
+<ul>
+  <li>Added the <code>check</code> command for template and link validation.</li>
+  <li>Improved incremental build performance for large sites.</li>
+</ul>
+<h3>1.1.0</h3>
+<ul>
+  <li>Introduced named blocks in the template engine.</li>
+  <li>Added the <code>highlight</code> extra for syntax highlighting.</li>
+</ul>
+<h3>1.0.0</h3>
+<ul>
+  <li>First stable release of the document pipeline.</li>
+</ul>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Can QuillKit be embedded in another application?</h3>
+<p>Yes. The renderer is a plain function that accepts a Document and returns a string, so it can be embedded in scripts, notebooks, or web services.</p>
+<h3>Does QuillKit require a network connection?</h3>
+<p>No. All processing happens locally; templates and assets are resolved from the file system.</p>
+<h3>How are template errors reported?</h3>
+<p>Errors include the template name, line number, and a short excerpt of the offending markup.</p>
+
+    <h2>Contributing and license</h2>
+    <p>QuillKit is developed in the open. Bug reports should include the QuillKit version, a minimal source file, and the complete error message.</p>
+<p>QuillKit is distributed under the MIT license.</p>
+
+    <h2>Supported platforms</h2>
+    <p>Linux and macOS.</p>
+
+    <h2>Python requirement</h2>
+    <p>Python 3.11 or later.</p>
+
+    <div>Diagnostic label: BENCHMARK_MARKER_7Q.</div>
+  </main>
+</body>
+</html>
